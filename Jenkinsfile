@@ -3,13 +3,6 @@ pipeline {
 
     stages {
 
-        stage('Clone') {
-            steps {
-                git branch: 'main',
-                url: 'YOUR_GITHUB_REPO_URL'
-            }
-        }
-
         stage('Build Docker Image') {
             steps {
                 sh 'docker build -t cinevault-app .'
@@ -24,13 +17,13 @@ pipeline {
 
         stage('Run Container') {
             steps {
-                sh 'docker run -d -p 8080:80 --name cinevault-container cinevault-app'
+                sh 'docker run -d -p 8085:80 --name cinevault-container cinevault-app'
             }
         }
 
         stage('Verify') {
             steps {
-                sh 'curl http://localhost:8080'
+                sh 'curl http://localhost:8085'
             }
         }
     }
