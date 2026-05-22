@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CineVault — Discover Movies</title>
+  <meta name="description" content="Discover trending movies and search for your favorites with CineVault, powered by TMDB." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ── NAV ── -->
+  <nav class="navbar" id="navbar">
+    <a href="#" class="logo" id="nav-logo" onclick="showPage('home')">
+      <span class="logo-icon">🎬</span>
+      <span>CineVault</span>
+    </a>
+    <div class="nav-links">
+      <a href="#" class="nav-link active" id="nav-home" onclick="showPage('home')">Home</a>
+      <a href="#" class="nav-link" id="nav-search" onclick="showPage('search')">Search</a>
+    </div>
+  </nav>
+
+  <!-- ══════════ HOME PAGE ══════════ -->
+  <div id="page-home" class="page active">
+
+    <!-- Hero -->
+    <section class="hero" id="hero-section">
+      <div class="hero-bg" id="hero-bg"></div>
+      <div class="hero-overlay"></div>
+      <div class="hero-content" id="hero-content">
+        <span class="hero-badge">🔥 Trending Now</span>
+        <h1 id="hero-title">Loading…</h1>
+        <p id="hero-overview" class="hero-overview"></p>
+        <div class="hero-meta" id="hero-meta"></div>
+        <div class="hero-actions">
+          <button class="btn-primary" id="hero-details-btn">View Details</button>
+          <button class="btn-ghost" onclick="showPage('search')">🔍 Search Movies</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Trending -->
+    <section class="section">
+      <div class="section-header">
+        <h2 class="section-title">Trending This Week</h2>
+        <a href="#" class="see-all" onclick="showPage('search')">See all →</a>
+      </div>
+      <div class="movie-grid" id="trending-grid">
+        <div class="skeleton-grid">
+          <div class="skeleton-card"></div><div class="skeleton-card"></div>
+          <div class="skeleton-card"></div><div class="skeleton-card"></div>
+          <div class="skeleton-card"></div><div class="skeleton-card"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Popular -->
+    <section class="section">
+      <div class="section-header">
+        <h2 class="section-title">Popular Movies</h2>
+      </div>
+      <div class="movie-grid" id="popular-grid">
+        <div class="skeleton-grid">
+          <div class="skeleton-card"></div><div class="skeleton-card"></div>
+          <div class="skeleton-card"></div><div class="skeleton-card"></div>
+          <div class="skeleton-card"></div><div class="skeleton-card"></div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ══════════ SEARCH PAGE ══════════ -->
+  <div id="page-search" class="page">
+    <div class="search-hero">
+      <h1 class="search-hero-title">Find Your Next Favorite</h1>
+      <p class="search-hero-sub">Search from millions of movies</p>
+      <div class="search-bar-wrap">
+        <input
+          type="text"
+          id="search-input"
+          class="search-input"
+          placeholder="Search movies, genres, actors…"
+          autocomplete="off"
+        />
+        <button class="search-btn" id="search-btn" onclick="handleSearch()">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="section" id="search-results-section" style="display:none;">
+      <div class="section-header">
+        <h2 class="section-title" id="results-title">Results</h2>
+      </div>
+      <div class="movie-grid" id="search-grid"></div>
+      <div class="load-more-wrap" id="load-more-wrap" style="display:none;">
+        <button class="btn-load-more" id="load-more-btn" onclick="loadMoreResults()">Load More</button>
+      </div>
+    </div>
+
+    <div class="empty-state" id="search-empty">
+      <div class="empty-icon">🎥</div>
+      <h3>Start Searching</h3>
+      <p>Type a movie name above to discover films</p>
+    </div>
+  </div>
+
+  <!-- ══════════ MOVIE MODAL ══════════ -->
+  <div class="modal-overlay" id="modal-overlay" onclick="closeModal()">
+    <div class="modal" id="modal" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <div class="modal-inner" id="modal-inner"></div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
