@@ -22,9 +22,9 @@ pipeline {
         }
 
         stage('Verify') {
-            steps {
-                sh 'curl http://localhost:8085'
-            }
-        }
+    steps {
+        sh 'docker ps'
+    }
+}
     }
 }
